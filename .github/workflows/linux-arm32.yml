@@ -45,6 +45,29 @@ env:
 
 jobs:
 
+  build-linux-arm64:
+    
+    runs-on: ubuntu-latest
+    container: ubuntu:18.04
+    
+    steps:
+      
+      - uses: actions/checkout@v2
+      - name: Set up dotnet
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: ${{ env.DOTNET_SDK_VERSION }}
+          include-prerelease: true
+      - run: dotnet publish BBDown -r linux-arm64 -c Release -p:StripSymbols=true -p:CppCompilerAndLinker=clang-9 -p:SysRoot=/crossrootfs/arm64 -o artifact
+      
+      - name: Upload Artifact[linux-arm64]
+        uses: actions/upload-artifact@v1.0.0
+        with:
+          name: BBDown_linux-arm64
+          path: artifact/BBDown
+
+
+
   build-linux-arm32:
     
     runs-on: ubuntu-latest
