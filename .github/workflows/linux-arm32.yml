@@ -47,8 +47,8 @@ jobs:
 
   build-linux-arm32:
     
-    runs-on: ubuntu-latest
-    container: mcr.microsoft.com/dotnet-buildtools/prereqs:ubuntu-18.04-cross-arm32-20220312201346-b2c2436
+    runs-on: ubuntu-18.04
+    container: ubuntu-18.04
     
     steps:
       
